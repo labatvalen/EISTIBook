@@ -1,0 +1,20 @@
+#titre {
+  text-align: center;
+  font-size : 30px;
+  margin-top : 2%;
+  margin-bottom : 2%;
+}
+
+#soustitre {
+  text-align : center;
+  font-size : 25px;
+  padding-top : 1.5%;
+  padding-bottom: 1.5%;
+}
+
+#mur,#res {
+    text-align: center;
+    margin-left: 40%;
+}
+
+body {}

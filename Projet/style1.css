@@ -1,0 +1,149 @@
+#Conversation{
+    float: left;
+    width: 250px;
+    height: 100%;
+}
+
+#messages{
+    float: right;
+    width: 80%;
+    margin: 0 5px 10% 0px;
+
+}
+.conv{
+    border: 1px solid #0094ff;
+    border-radius: 3px;
+    cursor: pointer;
+    display: block;
+    padding: 15px 5px 5px 5px;
+    height: 50px;
+    background-color: #0073c6;
+}
+
+.em{
+    float: right;
+    background-color: #e2e1e0;
+    color: #3a7cac;
+    margin: 5px 10px 5px 50%;
+    width: 50%;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+.Mco{
+    background-color: white;
+}
+
+.dest{
+    background-color: #e2e1e0;
+    color: #3a7cac;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    width: 48%;
+    float: left;
+    margin: 5px 50% 5px 0px;
+}
+
+.dest:hover{
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.em:hover{
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.signalM{
+    float: right;
+    margin-right: 780px;
+    width:100px;
+
+}
+
+#wBar{
+    position: fixed;
+    bottom: 10px;
+    right: 20px;
+    width: 50%;
+}
+
+#Mcontent{
+    border-radius: 2px;
+    width: 400px;
+    padding: 5px 10px 5px 10px;
+}
+
+.Mboutton{
+    border: 1px solid #0073c6;
+    border-radius: 2px;
+    padding: 5px 10px 5px 10px;
+    width: 100px;
+    height: 30px;
+}
+
+#NConversation{
+    margin-left: 70%;
+
+}
+
+#notifications{
+    margin-top: 10%;
+}
+
+#rechercheR{
+    margin-top: 10%;
+}
+
+.resR{
+    margin-top: 20px;
+    list-style-type: none;
+}
+
+.amis {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    /*text-align : center;*/
+    padding-top : 1%;
+    padding-bottom: 1%;
+    align : center;
+    background-color: #eeeeee;   /* Couleur de fond */
+    border-style: solid;   /* Style de la bordure  */
+    border-width: 1px;   /* Epaisseur de la bordure  */
+    border-color: #dddddd;   /* Couleur de la bordure  */
+    padding: 10px 10px 10px 10px;   /* Espace entre les bords et le contenu : haut droite bas gauche  */
+    font-size : 20px;
+    font-weight: bold;
+    position: relative;
+}
+}
+
+.imgamis {
+  width:25%;
+  display: inline-block;
+}
+
+.infamis {
+  position: absolute;
+  top: 50%; /* poussé de la moitié de hauteur du référent */
+  left:50%;
+  transform: translateY(-50%); /* tiré de la moitié de sa propre hauteur */
+  text-align: center;
+  display: inline-block;
+  padding-left: 10px;
+}
+
+.boutons {
+  padding-top: 15px;
+}
+
+.b {
+  display:inline;
+  padding-left:5px;
+  padding-right:5px;
+  padding-bottom: 5px;
+}
+
+#modif {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}

@@ -1,0 +1,409 @@
+function getXHR() {
+  var xhr = null;
+  if (window.XMLHttpRequest) // FF & autres
+     xhr = new XMLHttpRequest();
+  else if (window.ActiveXObject) { // IE < 7
+       try {
+         xhr = new ActiveXObject("Msxml2.XMLHTTP");
+       } catch (e) {
+         xhr = new ActiveXObject("Microsoft.XMLHTTP");
+       }
+  } else { // Objet non supporté par le navigateur
+     alert("Votre navigateur ne supporte pas AJAX");
+     xhr = false;
+  }
+  return xhr;
+}
+
+function like(p,u){
+    var xhr = getXHR();
+    document.getElementById("L"+p).innerHTML = "";
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200)
+        {
+            var reponse = xhr.responseText;
+            document.getElementById("L"+p).innerHTML = reponse;
+        }
+    }
+    xhr.open("GET","like.php?a="+p+"&b="+u,true);
+    xhr.send(null);
+}
+
+function dislike(p,u){
+    var xhr = getXHR();
+    document.getElementById("L"+p).innerHTML = "";
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200)
+        {
+            var reponse = xhr.responseText;
+            document.getElementById("L"+p).innerHTML = reponse;
+        }
+    }
+    xhr.open("GET","dislike.php?a="+p+"&b="+u,true);
+    xhr.send(null);
+}
+
+function signalP(idP,idU,idUS){
+    var xhr = getXHR();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200)
+        {
+            var reponse = xhr.responseText;
+            document.getElementById("signal"+idP).innerHTML = reponse;
+        }
+    }
+    xhr.open("GET","signalP.php?p="+idP+"&u="+idU+"&us="+idUS,true);
+    xhr.send(null);
+}
+
+function vsignalP(idP,idU,idUS){
+    var m = document.getElementById("motif"+idP).value;
+    var xhr = getXHR();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200)
+        {
+            var reponse = xhr.responseText;
+            document.getElementById("signal"+idP).innerHTML = reponse;
+        }
+    }
+    xhr.open("GET","vsignalP.php?p="+idP+"&u="+idU+"&us="+idUS+"&m="+m,true);
+    xhr.send(null);
+}
+
+function closeS(idP){
+    document.getElementById("signal"+idP).innerHTML = "";
+}
+
+function closeSM(idM,idU){
+    document.getElementById("signal"+idM).innerHTML = "";
+    var xhr = getXHR();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200)
+        {
+            var reponse = xhr.responseText;
+            document.getElementById("signal"+idM).innerHTML = reponse;
+        }
+    }
+    xhr.open("GET","closeSM.php?m="+idM+"&u="+idU,true);
+    xhr.send(null);
+}
+
+function initWall(u){
+    var xhr = getXHR(); 
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200)
+        {
+            var reponse = xhr.responseText;
+            document.getElementById("mur").innerHTML = reponse;
+        }
+    }
+    xhr.open("GET","util.php?t="+u,true);
+    xhr.send(null);
+}
+
+function rechercher(){ //nul
+    var r = document.getElementById("search").value;
+    var xhr = getXHR(); 
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200)
+        {
+            var reponse = xhr.responseText;
+            document.getElementById("i").innerHTML = reponse;
+        }
+    }
+    xhr.open("GET","recherche.php?r="+r,true);
+    xhr.send(null);
+}
+
+function deleteP(idP){
+    var xhr = getXHR(); 
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200)
+        {
+            var reponse = xhr.responseText;
+            document.getElementById("delet"+idP).innerHTML = reponse;
+        }
+    }
+    xhr.open("GET","deleteP.php?d="+idP,true);
+    xhr.send(null);
+}
+
+function vdeleteP(idP){
+    var xhr = getXHR();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200)
+        {
+            var reponse = xhr.responseText;
+            document.getElementById("delet"+idP).innerHTML = reponse;
+        }
+    }
+    xhr.open("GET","vdeleteP.php?d="+idP,true);
+    xhr.send(null);
+}
+
+function closeD(idP){
+document.getElementById("delet"+idP).innerHTML = "";
+}
+
+function publierM(idP){
+    var c = document.getElementById("Pcontent").value;
+    var xhr = getXHR();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200)
+        {
+            var reponse = xhr.responseText;
+            document.getElementById("res").innerHTML = reponse;
+        }
+    }
+    xhr.open("GET","publierM.php?c="+c+"&u="+idP,true);
+    xhr.send(null);
+}
+
+function upload() {
+  var xhr = getXHR();
+  // On définit que l'on va faire à chq changement d'état
+  xhr.onreadystatechange = function() {
+     // On ne fait quelque chose que si on a tout reç̧u
+     // et que le serveur est ok
+     if (xhr.readyState == 4 && xhr.status == 200){
+        // traitement ré́alisé avec la réponse...
+        reponse = xhr.responseText;
+        document.getElementById("test").innerHTML = reponse;
+     }
+  }
+
+  // Get the selected files from the input.
+  var files = document.getElementById('fileToUpload').files;
+
+  var fd = new FormData();
+
+    // Loop through each of the selected files.
+    for (var i = 0; i < files.length; i++) {
+    var file = files[i];
+
+    // Check the file type.
+    if (!file.type.match('image.*')) {
+        continue;
+    }
+
+    // Add the file to the request.
+    fd.append('fileToUpload', file, file.name);
+    }
+
+  // cas de la mé́thode post
+  xhr.open("POST","reception1.php",true) ;
+  xhr.send(fd);
+}
+
+function publierFA(idP){
+    var c = document.getElementById("publication_content").value;
+    var xhr = getXHR();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200)
+        {
+            var reponse = xhr.responseText;
+            document.getElementById("res").innerHTML = reponse;
+        }
+    }
+    xhr.open("GET","publierFA.php?c="+c+"&u="+idP+"&i="+i,true);
+    xhr.send(null);
+}
+
+function envoyer(idE,idD){
+   var c = document.getElementById("Mcontent").value;
+    var xhr = getXHR();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200)
+        {
+            var reponse = xhr.responseText;
+            document.getElementById("messages").innerHTML += reponse;
+        }
+    }
+    xhr.open("GET","envoyer.php?c="+c+"&e="+idE+"&d="+idD,true);
+    xhr.send(null);
+}
+
+function getBarM(idU,idD){
+    var xhr = getXHR();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200)
+        {
+            var reponse = xhr.responseText;
+            document.getElementById("wBar").innerHTML = reponse;
+        }
+    }
+    xhr.open("GET","getBarM.php?e="+idU+"&d="+idD,true);
+    xhr.send(null);
+}
+
+function conversation(idE,idD,idU){
+    getBarM(idU,idD); 
+    var xhr = getXHR();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200)
+        {
+            var reponse = xhr.responseText;
+            document.getElementById("messages").innerHTML = reponse;
+        }
+    }
+    xhr.open("GET","getconv.php?e="+idE+"&d="+idD+"&u="+idU,true);
+    xhr.send(null); 
+}
+
+function notification(idU){
+    var xhr = getXHR();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200)
+        {
+            var reponse = xhr.responseText;
+            document.getElementById("notifications").innerHTML = reponse;
+        }
+    }
+    xhr.open("GET","notification.php?u="+idU,true);
+    xhr.send(null); 
+}
+
+function annulerD(dem,dec){
+    var xhr = getXHR();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200)
+        {
+            var reponse = xhr.responseText;
+            document.getElementById("notifications").innerHTML = reponse;
+        }
+    }
+    xhr.open("GET","annulerD.php?dem="+dem+"&dec="+dec,true);
+    xhr.send(null); 
+}
+
+function accepterD(dem,dec){
+    var xhr = getXHR();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200)
+        {
+            var reponse = xhr.responseText;
+            document.getElementById("notifications").innerHTML = reponse;
+        }
+    }
+    xhr.open("GET","accepterD.php?dem="+dem+"&dec="+dec,true);
+    xhr.send(null); 
+}
+
+function signalM(idM,idU1,idU2){
+    var xhr = getXHR();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200)
+        {
+            var reponse = xhr.responseText;
+            document.getElementById("signal"+idM).innerHTML += reponse;
+        }
+    }
+    xhr.open("GET","signalM.php?idM="+idM+"&idU="+idU1+"&idU2="+idU2,true);
+    xhr.send(null); 
+}
+
+function vsignalM(idM,idU,idU2){
+    c = document.getElementById("motifSM"+idM).value;
+    var xhr = getXHR();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200)
+        {
+            var reponse = xhr.responseText;
+            document.getElementById("signal"+idM).innerHTML += reponse;
+        }
+    }
+    xhr.open("GET","vsignalM.php?idM="+idM+"&idU="+idU+"&c="+c+"&idU2="+idU2,true);
+    xhr.send(null); 
+}
+
+function send(ide,idd){
+    var xhr = getXHR();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200)
+        {
+            var reponse = xhr.responseText;
+            document.getElementById("wBar").innerHTML = reponse;
+        }
+    }
+    xhr.open("GET","send.php?e="+ide+"&d="+idd,true);
+    xhr.send(null); 
+}
+
+function start(){
+    var xhr = getXHR();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200)
+        {
+            var reponse = xhr.responseText;
+            document.getElementById("lst_utilisateur").innerHTML = reponse;
+        }
+    }
+    xhr.open("POST","listUtilAjax.php",true);
+    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded;charset=utf-8');
+    xhr.send();
+}
+
+function modif($i){
+    var idPublic = document.getElementsByName("utilisateur"+$i)[0].value;
+    var nom = document.getElementsByName("utilisateur"+$i)[1].value;
+    var prenom = document.getElementsByName("utilisateur"+$i)[2].value;
+    var login = document.getElementsByName("utilisateur"+$i)[3].value;
+    var sexe = document.getElementsByName("utilisateur"+$i)[4].value;
+    var ville = document.getElementsByName("utilisateur"+$i)[5].value;
+    var job = document.getElementsByName("utilisateur"+$i)[6].value;
+    var idpdp = document.getElementsByName("utilisateur"+$i)[7].value;
+    var ddn = document.getElementsByName("utilisateur"+$i)[8].value;
+    var idPrivee = document.getElementsByName("utilisateur"+$i)[9].value;
+    var mdp = document.getElementsByName("utilisateur"+$i)[10].value;
+    var email = document.getElementsByName("utilisateur"+$i)[11].value;
+    var xhr = getXHR();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200)
+        {
+            var reponse = xhr.responseText;
+            document.getElementById("lst_utilisateur").innerHTML = "";
+            document.getElementById("lst_utilisateur").innerHTML = reponse;
+        }
+    }
+    xhr.open("POST","listUtilAjax.php",true);
+    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded;charset=utf-8');
+    xhr.send("idPublic="+idPublic+"&nom="+nom+"&prenom="+prenom+"&login="+login+"&sexe="
+        +sexe+"&ville="+ville+"&job="+job+"&idpdp="+idpdp+"&ddn="
+        +ddn+"&idPrivee="+idPrivee+"&mdp="+mdp+"&email="+email+"&i="+$i);
+}
+
+function deleteUtil($i){
+    var idPublic = document.getElementsByName("utilisateur"+$i)[0].value;
+    var idPrivee = document.getElementsByName("utilisateur"+$i)[9].value;
+    alert(idPrivee);
+    alert(idPublic);
+    var xhr = getXHR();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200)
+        {
+            var reponse = xhr.responseText;
+            document.getElementById("lst_utilisateur").innerHTML = "";
+            document.getElementById("lst_utilisateur").innerHTML = reponse;
+        }
+    }
+    xhr.open("POST","listUtilAjax.php",true);
+    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded;charset=utf-8');
+    xhr.send("i="+$i+"&idPrivee="+idPrivee+"&idPublic="+idPublic);
+}
+
+function voirMessage($i){
+    var idPublic = document.getElementsByName("utilisateur"+$i)[0].value;
+    var xhr = getXHR();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200)
+        {
+            var reponse = xhr.responseText;
+            document.getElementById("lst_utilisateur").innerHTML = "";
+            document.getElementById("lst_utilisateur").innerHTML = reponse;
+        }
+    }
+    xhr.open("POST","messagerie.php",true);
+    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded;charset=utf-8');
+    xhr.send("i="+$i+"&idPublic="+idPublic);
+}
+

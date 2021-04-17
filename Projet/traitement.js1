@@ -1,0 +1,236 @@
+//page des fonctions js
+
+function propre1() {
+    if (document.getElementById("homme").checked){
+      if (document.getElementById("prop").checked != true){
+	        document.getElementById("ava").innerHTML = '<img id = "avatarhomme" name="avatar" src = "images/homme.jpg" />';
+      }
+    } else if (document.getElementById("femme").checked){
+      if (document.getElementById("prop").checked != true){
+        document.getElementById("ava").innerHTML = '<img id = "avatarfemme" name="avatar" src = "images/femme.jpg" />';
+      }
+    } else {
+      if (document.getElementById("prop").checked != true){
+        document.getElementById("ava").innerHTML = '<img id = "avatarautre" name="avatar" src = "images/autre.jpeg" />';
+      }
+    }
+}
+
+function propre() {
+  if (document.getElementById("prop").checked != true){
+    if (document.getElementById("homme").checked){
+	     document.getElementById("ava").innerHTML = '<img id = "avatarhomme" name="avatar" src = "images/homme.jpg" />';
+     } else if (document.getElementById("femme").checked) {
+       document.getElementById("ava").innerHTML = '<img id = "avatarfemme" name="avatar" src = "images/femme.jpg" />';
+     } else {
+       document.getElementById("ava").innerHTML = '<img id = "avatarautre" name="avatar" src = "images/autre.jpeg" />';
+    }
+  } else {
+	  document.getElementById("ava").innerHTML = '<input id="fileToUpload" type="file" name="fileToUpload" /><input type="button" name="go" value="Choisir" onclick="execution()"/>';
+  }
+}
+
+function getXHR() {
+  var xhr = null;
+  if (window.XMLHttpRequest) // FF & autres
+     xhr = new XMLHttpRequest();
+  else if (window.ActiveXObject) { // IE < 7
+       try {
+         xhr = new ActiveXObject("Msxml2.XMLHTTP");
+       } catch (e) {
+         xhr = new ActiveXObject("Microsoft.XMLHTTP");
+       }
+  } else { // Objet non supporté par le navigateur
+     alert("Votre navigateur ne supporte pas AJAX");
+     xhr = false;
+  }
+  return xhr;
+}
+
+
+function execution() {
+  var xhr = getXHR();
+  // On définit que l'on va faire à chq changement d'état
+  xhr.onreadystatechange = function() {
+     // On ne fait quelque chose que si on a tout reç̧u
+     // et que le serveur est ok
+     if (xhr.readyState == 4 && xhr.status == 200){
+        // traitement ré́alisé avec la réponse...
+        reponse = xhr.responseText;
+        document.getElementById("test").innerHTML = reponse;
+     }
+  }
+
+  // Get the selected files from the input.
+  var files = document.getElementById('fileToUpload').files;
+
+  var fd = new FormData();
+
+    // Loop through each of the selected files.
+    for (var i = 0; i < files.length; i++) {
+    var file = files[i];
+
+    // Check the file type.
+    if (!file.type.match('image.*')) {
+        continue;
+    }
+
+    // Add the file to the request.
+    fd.append('fileToUpload', file, file.name);
+    }
+
+    fd.append('test','toto');
+
+  // cas de la mé́thode post
+  xhr.open("POST","reception1.php",true) ;
+  xhr.send(fd);
+}
+
+function motif(nom,prenom,p) {
+  document.getElementById('supplementaire'+p).innerHTML='Quel problème voulez-vous signaler au sujet du compte de '+prenom+' '+nom+' ? (Notez que tout signalement abusif peut entraîner un bannisement du réseau social)<br><input type="text" name="texte" id="texte"><input type="button" value="Soumettre" onclick="signaler(\''+nom+'\',\''+prenom+'\',\''+p+'\')">';
+}
+
+function signaler(nom,prenom,idmotif) {
+  var xhr = getXHR();
+  moti=document.getElementById('texte').value;
+  // On définit que l'on va faire à chq changement d'état
+  xhr.onreadystatechange = function() {
+     // On ne fait quelque chose que si on a tout reç̧u
+     // et que le serveur est ok
+
+     if (xhr.readyState == 4 && xhr.status == 200){
+        // traitement ré́alisé avec la réponse...
+        document.getElementById("confirmation").innerHTML = xhr.responseText;
+     }
+   }
+  // cas de la mé́thode post
+  xhr.open("POST","tt1.php",true) ;
+  xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded;charset=utf-8');
+  xhr.send("nom="+nom+"&prenom="+prenom+"&moti="+moti);
+
+}
+
+function deconnect() {
+  var xhr = getXHR();
+  // On définit que l'on va faire à chq changement d'état
+  xhr.onreadystatechange = function() {
+     // On ne fait quelque chose que si on a tout reç̧u
+     // et que le serveur est ok
+
+     if (xhr.readyState == 4 && xhr.status == 200){
+        // traitement ré́alisé avec la réponse...
+        document.location.href="connectinscrip.php";
+     }
+   }
+  // cas de la mé́thode post
+  xhr.open("POST","tt6.php",true) ;
+  xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded;charset=utf-8');
+  //xhr.send("nom="+nom+"&prenom="+prenom+"&moti="+moti);
+
+}
+
+function modifprofil() {
+  var xhr = getXHR();
+
+  var nom=document.getElementById('nom').value;
+  var prenom=document.getElementById('prenom').value;
+  var sexe='';
+  if (document.getElementById("homme").checked){
+    var sexe='Homme';
+  } else if (document.getElementById("femme").checked){
+    var sexe='Femme';
+  } else {
+    var sexe='Autre';
+  }
+  var ville=document.getElementById('ville').value;
+  var travail=document.getElementById('travail').value;
+  var ddn=document.getElementById('ddn').value;
+  var email=document.getElementById('email').value;
+  if (document.getElementById("changement").checked==true) {
+    var amdp=document.getElementById('amdp').value;
+    var nmdp=document.getElementById('nmdp').value;
+    var cmdp=document.getElementById('cmdp').value;
+  } else {
+    var amdp='';
+    var nmdp='';
+    var cmdp='';
+  }
+
+
+  // On définit que l'on va faire à chq changement d'état
+  xhr.onreadystatechange = function() {
+     // On ne fait quelque chose que si on a tout reç̧u
+     // et que le serveur est ok
+
+     if (xhr.readyState == 4 && xhr.status == 200){
+        // traitement ré́alisé avec la réponse...
+                document.getElementById("confirmation").innerHTML = xhr.responseText;
+     }
+   }
+  // cas de la mé́thode post
+  xhr.open("POST","tt3.php",true) ;
+  xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded;charset=utf-8');
+  xhr.send("nom="+nom+"&prenom="+prenom+"&sexe="+sexe+"&ville="+ville+"&travail="+travail+"&ddn="+ddn+"&email="+email+"&amdp="+amdp+"&nmdp="+nmdp+"&cmdp="+cmdp);
+}
+
+function modifmdp() {
+  if (document.getElementById("changement").checked==true) {
+    document.getElementById('mdp').innerHTML='<div>Ancien mot de passe : <input type="text" id="amdp"></div><div>Nouveau mot de passe : <input type="text" id="nmdp"></div><div>Confirmation mot de passe : <input type="text" id="cmdp"></div>';
+  } else {
+    document.getElementById('mdp').innerHTML='';
+  }
+}
+
+function autreprof(a,b) {
+  var xhr = getXHR();
+  // On définit que l'on va faire à chq changement d'état
+  xhr.onreadystatechange = function() {
+     // On ne fait quelque chose que si on a tout reç̧u
+     // et que le serveur est ok
+
+     if (xhr.readyState == 4 && xhr.status == 200){
+        // traitement ré́alisé avec la réponse...
+        document.location.href="autreprofil.php";
+     }
+   }
+  // cas de la mé́thode post
+  xhr.open("POST","tt2.php",true) ;
+  xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded;charset=utf-8');
+  xhr.send("a="+a+"&b="+b);
+}
+
+function bloquer(nom,prenom,id) {
+  var xhr = getXHR();
+  // On définit que l'on va faire à chq changement d'état
+  xhr.onreadystatechange = function() {
+     // On ne fait quelque chose que si on a tout reç̧u
+     // et que le serveur est ok
+
+     if (xhr.readyState == 4 && xhr.status == 200){
+        // traitement ré́alisé avec la réponse...
+        document.getElementById("supplementaire"+id).innerHTML = xhr.responseText;
+     }
+   }
+  // cas de la mé́thode post
+  xhr.open("POST","tt4.php",true) ;
+  xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded;charset=utf-8');
+  xhr.send("nom="+nom+"&prenom="+prenom);
+}
+
+function supprimer(nom,prenom,id) {
+  var xhr = getXHR();
+  // On définit que l'on va faire à chq changement d'état
+  xhr.onreadystatechange = function() {
+     // On ne fait quelque chose que si on a tout reç̧u
+     // et que le serveur est ok
+
+     if (xhr.readyState == 4 && xhr.status == 200){
+        // traitement ré́alisé avec la réponse...
+        document.getElementById("supplementaire"+id).innerHTML = xhr.responseText;
+     }
+   }
+  // cas de la mé́thode post
+  xhr.open("POST","tt5.php",true) ;
+  xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded;charset=utf-8');
+  xhr.send("nom="+nom+"&prenom="+prenom);
+}

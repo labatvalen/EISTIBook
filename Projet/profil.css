@@ -1,0 +1,292 @@
+body {
+    margin: 0px;
+    font-family: Arial;
+}
+/***********************************************************************/
+/************ menu horizontal sur les pages*****************************/
+/***********************************************************************/
+.menu_horizontal{
+    position: fixed;
+    margin: 0px 0px 0px 0px;
+    background-color: #edecec;
+    width: 100%;
+    height: 50px;
+    display: block;
+    border-style: solid;   
+    border-width: 2px;   
+    border-color: #cacaca;
+}
+
+/************ image du logo       **************************************/
+.logo {
+    top: 2px;
+    left: 15px;
+    right: 5px;
+    bottom: 5px;
+	position: absolute;
+    float:left;
+    z-index: 2;
+}
+
+.logo2 {
+    align-content: center;
+    border-radius:1px;
+    width: 35px;
+    height: 45px;
+    float:left;
+}
+
+/************ titre de la page    **************************************/
+.titre {
+    margin-top: 2px;
+    margin-left: 70px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+    font-size : 40px;
+    float:left;
+    z-index: 2;
+}
+
+/************ barre de recherche  **************************************/
+.barre_de_recherche{
+    position: top;
+    display: block;
+    margin-top: 8px;
+    margin-bottom: 5px;
+    margin-right: 75px;
+    text-align: center;
+    float: right;
+    z-index: 2;
+}
+
+.saisie{
+    align-content: top; 
+    border-style: solid;   
+    border-width: 2px;
+    border-color: #cacaca;
+    border-radius: 4px;
+    padding: 3px 10px 3px 18px;
+    width: 25em;
+    font-weight: normal;
+    font-size : 20px;  
+}
+
+.bouton_de_recherche {
+    border-style: solid;   
+    border-width: 2px;
+    border-color: #4CAF50;
+    border-radius: 4px;
+    background-color: #4CAF50;
+    padding: 3px 16px 3px 16px;
+    font-weight: normal;
+    font-size : 20px;
+    color: white;
+}
+
+.bouton_de_recherche img {
+    align-content:center;
+    padding: 3px 16px 3px 8px;
+    position: top;
+    width: 15px;
+    height: 15px;
+}
+
+/***********************************************************************/
+/************ menu vertical sur les pages  *****************************/
+html>body .menu_vertical {
+    position: fixed;
+    margin-top: 54px;
+    height: 100%;
+    background-color: #edecec;
+    width: 299px;
+}
+
+.menu_vertical {
+    position: relative;
+    margin-right: 80%;
+}
+
+.menu_vertical input{
+    position: absolute;
+    margin-right: 80%;
+    background-color: #edecec;
+    width:300px;
+    text-align: justify;
+    height: 100%;
+    display: block;
+    z-index: 9;
+    border-style: solid;   
+    border-width: 2px;   
+    border-color: #cacaca;
+    border-left: white;
+    cursor: pointer;
+  
+    opacity: 0; /* hide this */
+    z-index: 2;
+    background-color: #edecec;
+    border-right: 12px solid #edecec;
+}
+
+.menu_vertical .liens{
+    border-right: 2px solid #cacaca;
+    background-color: #edecec;
+    width: 300px;
+    padding-top: 350px;
+}
+
+.menu_vertical a {
+    color: black;
+    display: block;
+    align-content: center;
+    padding:12px;
+    text-decoration: none;
+    font-size: 28px;
+}
+
+.menu_vertical a:hover {
+    background-color: #767676;
+}
+
+.menu_vertical a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/************ image du profil      *************************************/
+.menu_vertical .image_profil1 {
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 50px;
+	position: fixed;
+    float:left;
+    z-index: 2;
+}
+
+.menu_vertical .image_profil2 {
+    align-content: center;
+    border-radius:50px;
+    float:left;
+}
+
+/***********************************************************************/
+
+/***********************************************************************/
+/************ contenu de la page ***************************************/
+/***********************************************************************/
+.entete{
+    position: fixed;
+    float:right;
+    display:block;
+    top: 54px;
+    left: 302px;
+    padding: 1em 3em 1em 6em;
+    width: 100%;
+    height: 31px;
+    text-align: justify;
+    font-size : 30px;
+    border-bottom: 2px solid #cacaca;
+    background-color: #0093ff;
+    color:white;
+}
+.carreG{
+    position: fixed;
+    top: 117px;
+    left: 302px;
+    width: 30px;
+    height: 50px;
+    background-color: #0093ff;
+    z-index: 1;
+}
+.carreD{
+    position: fixed;
+    right: 0px;
+    top: 117px;
+    width: 30px;
+    height: 50px;
+    background-color: #0093ff;
+    z-index: 1;
+}
+.rondG {
+    position: fixed;
+    top: 144px;
+    left: 300px;
+    width: 30px;
+    height: 30px;
+    
+    border-color: #cacaca;
+    border-top-width: 2px;
+    border-top-style: solid;
+    border-left-style: solid;
+    border-left-width: 2px;
+    
+    border-radius: 30px 0px 0px 0px;
+    background-color: #edecec;  
+    z-index: 2; 
+}
+
+.rondD {
+    position: fixed;
+    right: 0px;
+    top: 144px;
+    width: 30px;
+    height: 30px;
+    
+    border-color: #cacaca;
+    border-top-width: 2px;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-right-width: 2px;
+    
+    border-radius: 0px 30px 0px 0px;
+    background-color: #edecec;  
+    z-index: 1; 
+}
+
+.page{
+    display:block;
+    background-color:#edecec; 
+    margin-top: 127px;
+    margin-left: 300px;
+    padding: 1em 3em 1em 4em;
+    text-align: justify;
+    border: 2px solid #cacaca;
+    height: 100%;
+    box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.9);
+    z-index: 3; 
+}
+
+
+.content{
+    display:block;
+    text-align: justify;
+    background-color:#edecec; 
+    border:0px solid #cacaca; 
+    border-radius:30px 0px 0px 0px;
+    z-index: 1;
+}
+
+
+.titreFrm{
+    color : #6c6c6c;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
